@@ -1,23 +1,24 @@
 package io.spring.helloworld.configuration;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.repeat.RepeatStatus;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @Slf4j
+@RequiredArgsConstructor
 public class StepTransitionConfiguration {
 
-    @Autowired
-    private JobBuilderFactory jobBuilderFactory;
-    @Autowired
-    private StepBuilderFactory stepBuilderFactory;
+    private final JobBuilderFactory jobBuilderFactory;
+    private final StepBuilderFactory stepBuilderFactory;
+
+    private static final String COMPLETED = "COMPLETED";
 
     @Bean
     public Step step1(){
@@ -26,7 +27,7 @@ public class StepTransitionConfiguration {
                     log.info(">> This is step1");
                     return RepeatStatus.FINISHED;
                 })
-//                .allowStartIfComplete(true)
+                .allowStartIfComplete(true)
                 .build();
     }
 
@@ -36,7 +37,9 @@ public class StepTransitionConfiguration {
                 .tasklet((contribution, chunkContext) -> {
                     log.info(">> This is step2");
                     return RepeatStatus.FINISHED;
-                }).build();
+                })
+                .allowStartIfComplete(true)
+                .build();
     }
 
     @Bean
@@ -45,22 +48,19 @@ public class StepTransitionConfiguration {
                 .tasklet((contribution, chunkContext) -> {
                     log.info(">> This is step3");
                     return RepeatStatus.FINISHED;
-                }).build();
+                })
+                .allowStartIfComplete(true)
+                .build();
     }
-
-//    @Bean
-//    public Job helloWorldJob(){
-//        return jobBuilderFactory.get("helloWorldJob")
-//                .start(step1())
-//                .build();
-//    }
 
     @Bean
     public Job transitionSimpleJobNext(){
         return jobBuilderFactory.get("transitionSimpleJobNext")
-                .start(step1())
-                .next(step2())
-                .next(step3())
+                .start(step1()).on(COMPLETED).to(step2())
+//                .from(step2()).on(COMPLETED).fail()
+//                .from(step2()).on(COMPLETED).to(step3())
+                .from(step2()).on(COMPLETED).stopAndRestart(step3())
+                .from(step3()).end()
                 .build();
     }
 }
