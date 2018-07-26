@@ -6,5 +6,4 @@ spring:
     password: 1234
   batch:
     schema: classpath:/org/springframework/batch/core/schema-mysql.sql
-    #initialize-schema: always
-
+    initialize-schema: always
