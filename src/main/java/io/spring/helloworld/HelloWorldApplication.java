@@ -14,8 +14,8 @@ public class HelloWorldApplication {
         SpringApplication.run(HelloWorldApplication.class, args);
     }
 
-    @Bean
-    public JobLauncherTestUtils utils(){
-        return new JobLauncherTestUtils();
-    }
+//    @Bean
+//    public JobLauncherTestUtils utils(){
+//        return new JobLauncherTestUtils();
+//    }
 }
