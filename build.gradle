@@ -26,11 +26,16 @@ repositories {
 
 dependencies {
     compile('org.springframework.boot:spring-boot-starter-batch')
+    compile("org.springframework.boot:spring-boot-starter-data-jpa")
+
+
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile('org.springframework.batch:spring-batch-test')
+
     compile ("org.projectlombok:lombok:1.16.14")
-//    compile('org.springframework.boot:spring-boot-start-jdbc')
     compile('mysql:mysql-connector-java')
-    compile("org.springframework.boot:spring-boot-starter-data-jpa")
     compile("com.h2database:h2")
+    //    compile("org.springframework.boot:spring-boot-stater-mail") 이게 동작하지 않아서 아래 라이브러리를 추가하였다.
+    compile('org.springframework:spring-context-support:5.0.7.RELEASE')
+    compile group: 'com.sun.mail', name: 'javax.mail', version: '1.6.1'
 }
