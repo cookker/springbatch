@@ -1,4 +1,4 @@
-spring.profiles.active: local
+spring.profiles.active: dev
 #spring:
 #  mail:
 #    host: smtp.gmail.com
@@ -6,7 +6,6 @@ spring.profiles.active: local
 #    protocol: smtp
 #    default-encoding: utf-8
 #    username: i3rewmaster@gmail.com
-#    password: gooracle11G!@#$
 
 
 ---
@@ -36,5 +35,5 @@ spring:
   batch:
     schema: classpath:/org/springframework/batch/core/schema-mysql.sql
     initialize-schema: always
-    job:
-      names: parentJob
+#    job:
+#      names: parentJob
