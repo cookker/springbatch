@@ -16,4 +16,11 @@ public class Customer {
     private final String firstName;
     private final String lastName;
     private final Date birthdate;
+
+    public Customer toUpper(){
+        return new Customer(this.getId(),
+                this.getFirstName().toUpperCase(),
+                this.getLastName().toUpperCase(),
+                this.birthdate);
+    }
 }
