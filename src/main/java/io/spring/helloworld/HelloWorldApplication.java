@@ -9,7 +9,7 @@ import org.springframework.integration.annotation.IntegrationComponentScan;
 
 @SpringBootApplication
 @EnableBatchProcessing
-@IntegrationComponentScan
+//@IntegrationComponentScan
 public class HelloWorldApplication {
 
     public static void main(String[] args) {
