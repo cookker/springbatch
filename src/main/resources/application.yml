@@ -1,4 +1,4 @@
-spring.profiles.active: dev
+#spring.profiles.active: dev
 #spring:
 #  mail:
 #    host: smtp.gmail.com
@@ -8,28 +8,26 @@ spring.profiles.active: dev
 #    username: i3rewmaster@gmail.com
 
 
----
+#---
+#spring:
+#  profiles: local
+#  datasource:
+#    driver-class-name: org.h2.Driver
+#    url: jdbc:h2:mem:test;MODE=MySQL;DB_CLOSE_ON_EXIT=FALSE
+#    username: sa
+#    password:
+#  batch:
+#    schema: classpath:/org/springframework/batch/core/schema-h2.sql
+#    initialize-schema: always
+#  h2:
+#    console:
+#      enabled: true
+#---
 spring:
-  profiles: local
-  datasource:
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:mem:test;MODE=MySQL;DB_CLOSE_ON_EXIT=FALSE
-    username: sa
-    password:
-  batch:
-    schema: classpath:/org/springframework/batch/core/schema-h2.sql
-    initialize-schema: always
-#    job:
-#      names: parentJob
-  h2:
-    console:
-      enabled: true
----
-spring:
-  profiles: dev
+#  profiles: dev
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/learning_spring_batch
+    url: jdbc:mysql://localhost:3306/learning_spring_batch?verifyServerCertificate=false&useSSL=false
     username: root
     password: 1234
   batch:
